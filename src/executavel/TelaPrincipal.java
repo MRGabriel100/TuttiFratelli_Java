@@ -17,44 +17,54 @@ import javax.swing.JMenuItem;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
+import java.awt.Insets;
+import java.awt.CardLayout;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.UIManager;
+import javax.swing.border.MatteBorder;
 
-public class JPanelTelaPrincipal extends JPanel {
+public class TelaPrincipal extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public JPanelTelaPrincipal() {
+	public TelaPrincipal() {
+		setMinimumSize(new Dimension(300, 300));
+		setPreferredSize(new Dimension(600, 500));
 		
-		JPanel panel = new JPanel();
+		JPanel panelRodaPe = new JPanel();
+		panelRodaPe.setBorder(new MatteBorder(1, 0, 0, 0, (Color) Color.GRAY));
+		panelRodaPe.setBackground(Color.WHITE);
 		
 		JPanel JPanelMenu = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-				.addComponent(JPanelMenu, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+				.addComponent(JPanelMenu, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+				.addComponent(panelRodaPe, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(JPanelMenu, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 438, Short.MAX_VALUE)
+					.addComponent(panelRodaPe, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
 		);
-		JPanelMenu.setLayout(null);
+		JPanelMenu.setLayout(new CardLayout(0, 0));
 		
-		JMenuBar MenuBar = new JMenuBar();
-		MenuBar.setAutoscrolls(true);
-		MenuBar.setSize(new Dimension(600, 30));
-		MenuBar.setMaximumSize(new Dimension(0, 30));
-		MenuBar.setMinimumSize(new Dimension(600, 30));
-		MenuBar.setAlignmentY(Component.CENTER_ALIGNMENT);
-		MenuBar.setBackground(new Color(0, 0, 0));
-		MenuBar.setBounds(0, 0, 32767, 30);
-		JPanelMenu.add(MenuBar);
+		JMenuBar MBarMenu = new JMenuBar();
+		MBarMenu.setSize(new Dimension(0, 30));
+		MBarMenu.setPreferredSize(new Dimension(0, 30));
+		MBarMenu.setAutoscrolls(true);
+		MBarMenu.setMaximumSize(new Dimension(32767, 30));
+		MBarMenu.setMinimumSize(new Dimension(600, 30));
+		MBarMenu.setAlignmentY(Component.CENTER_ALIGNMENT);
+		MBarMenu.setBackground(new Color(0, 0, 0));
+		JPanelMenu.add(MBarMenu, "name_4732348972388");
 		
 		JMenu mnCadastros = new JMenu("Cadastros");
-		MenuBar.add(mnCadastros);
+		MBarMenu.add(mnCadastros);
 		
 		JMenuItem mntmClientes = new JMenuItem("Clientes");
 		mntmClientes.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -65,7 +75,7 @@ public class JPanelTelaPrincipal extends JPanel {
 		mnCadastros.add(mntmProdutos);
 		
 		JMenu mnLanamentos = new JMenu("Lan\u00E7amentos");
-		MenuBar.add(mnLanamentos);
+		MBarMenu.add(mnLanamentos);
 		
 		JMenuItem mntmPedidos = new JMenuItem("Pedidos");
 		mnLanamentos.add(mntmPedidos);

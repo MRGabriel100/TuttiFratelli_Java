@@ -1,9 +1,10 @@
 package cadastros;
 
+import executavel.ReadConfig;
+
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,11 +17,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import java.awt.Font;
+import java.awt.CardLayout;
 
-public class JPanelCadastroProduto extends JPanel {
+public class CadastroProduto extends JPanel {
 	
 	/*** Create the panel. */
-	public JPanelCadastroProduto() {
+	public CadastroProduto() {
+		String IconFolder = ReadConfig.getIcon(); /* Obtem a pasta padrão dos icones. */
 		
 		setPreferredSize(new Dimension(600, 450));
 		setMinimumSize(new Dimension(500, 350));
@@ -47,6 +50,19 @@ public class JPanelCadastroProduto extends JPanel {
 		panelRodaPe.setMinimumSize(new Dimension(12, 23));
 		panelRodaPe.setMaximumSize(new Dimension(32767, 23));
 		panelRodaPe.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		
+		JLayeredPane imagemTela = new JLayeredPane();
+		imagemTela.setPreferredSize(new Dimension(120, 43));
+		imagemTela.setMaximumSize(new Dimension(120, 43));
+		imagemTela.setMinimumSize(new Dimension(120, 43));
+		imagemTela.setBackground(Color.WHITE);
+		
+		JLabel IconTela = new JLabel("");
+		IconTela.setBounds(36, 2, 39, 39);
+		imagemTela.add(IconTela);
+		IconTela.setHorizontalAlignment(SwingConstants.CENTER);
+		IconTela.setHorizontalTextPosition(SwingConstants.CENTER);
+		IconTela.setIcon(new ImageIcon(IconFolder + "\\Menus\\ImgProd.png"));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -54,16 +70,21 @@ public class JPanelCadastroProduto extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(panelRodaPe, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(panelDados, GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(panelTitulo, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 473, Short.MAX_VALUE)
+								.addComponent(panelDados, GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panelAcoes, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE))
-						.addComponent(panelTitulo, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(imagemTela, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(panelAcoes, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE))))
 					.addGap(0))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panelTitulo, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(panelTitulo, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+						.addComponent(imagemTela, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(panelDados, GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
@@ -71,11 +92,18 @@ public class JPanelCadastroProduto extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelRodaPe, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
 		);
+		panelTitulo.setLayout(new CardLayout(0, 0));
+		
+		JLabel lblCadastroDeCliente = DefaultComponentFactory.getInstance().createTitle("Cadastro de Produto");
+		panelTitulo.add(lblCadastroDeCliente, "name_5428115894906");
+		lblCadastroDeCliente.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblCadastroDeCliente.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCadastroDeCliente.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		
 		JButton btnAjuda = new JButton("");
 		btnAjuda.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnAjuda.setBorder(null);
-		btnAjuda.setIcon(new ImageIcon("D:\\Programacao\\Java Workspace\\TuttiFratelli\\Icones\\Botoes\\btnAjuda_18.png"));
+		btnAjuda.setIcon(new ImageIcon(IconFolder + "\\Botoes\\btnAjuda_18.png"));
 		GroupLayout gl_panelRodaPe = new GroupLayout(panelRodaPe);
 		gl_panelRodaPe.setHorizontalGroup(
 			gl_panelRodaPe.createParallelGroup(Alignment.LEADING)
@@ -94,62 +122,29 @@ public class JPanelCadastroProduto extends JPanel {
 		panelAcoes.setLayout(null);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setIcon(new ImageIcon("D:\\Programacao\\Java Workspace\\TuttiFratelli\\Icones\\Botoes\\btnConfirma_20.png"));
+		btnConfirmar.setIcon(new ImageIcon(IconFolder + "\\Botoes\\btnConfirma_20.png"));
 		btnConfirmar.setBounds(7, 11, 108, 23);
 		panelAcoes.add(btnConfirmar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setIcon(new ImageIcon("D:\\Programacao\\Java Workspace\\TuttiFratelli\\Icones\\Botoes\\btnCancelar_20.png"));
+		btnCancelar.setIcon(new ImageIcon(IconFolder + "\\Botoes\\btnCancelar_20.png"));
 		btnCancelar.setBounds(7, 45, 108, 23);
 		panelAcoes.add(btnCancelar);
 		
 		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.setIcon(new ImageIcon("D:\\Programacao\\Java Workspace\\TuttiFratelli\\Icones\\Botoes\\btnExcluir_20.png"));
+		btnExcluir.setIcon(new ImageIcon(IconFolder + "\\btnExcluir_20.png"));
 		btnExcluir.setBounds(7, 79, 108, 23);
 		panelAcoes.add(btnExcluir);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setIcon(new ImageIcon("D:\\Programacao\\Java Workspace\\TuttiFratelli\\Icones\\Botoes\\btnPesquisar_20.png"));
+		btnPesquisar.setIcon(new ImageIcon(IconFolder + "\\Botoes\\btnPesquisar_20.png"));
 		btnPesquisar.setBounds(7, 113, 108, 23);
 		panelAcoes.add(btnPesquisar);
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setIcon(new ImageIcon("D:\\Programacao\\Java Workspace\\TuttiFratelli\\Icones\\Botoes\\Voltar_20.png"));
+		btnSair.setIcon(new ImageIcon(IconFolder + "\\Botoes\\Voltar_20.png"));
 		btnSair.setBounds(7, 147, 108, 23);
 		panelAcoes.add(btnSair);
-		panelTitulo.setLayout(null);
-		
-		JLayeredPane imagemTela = new JLayeredPane();
-		imagemTela.setPreferredSize(new Dimension(120, 43));
-		imagemTela.setMaximumSize(new Dimension(120, 43));
-		imagemTela.setMinimumSize(new Dimension(120, 43));
-		imagemTela.setBackground(Color.WHITE);
-		imagemTela.setBounds(480, 0, 120, 43);
-		panelTitulo.add(imagemTela);
-		
-		JLabel label = new JLabel("");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setHorizontalTextPosition(SwingConstants.CENTER);
-		label.setIcon(new ImageIcon("D:\\Programacao\\Java Workspace\\TuttiFratelli\\Icones\\Menus\\ImgProd.png"));
-		label.setBounds(0, 0, 120, 43);
-		imagemTela.add(label);
-		
-		JPanel panelDescricao = new JPanel();
-		panelDescricao.setPreferredSize(new Dimension(460, 35));
-		panelDescricao.setSize(new Dimension(460, 35));
-		panelDescricao.setMinimumSize(new Dimension(200, 35));
-		panelDescricao.setMaximumSize(new Dimension(32767, 35));
-		panelDescricao.setBounds(10, 4, 460, 35);
-		panelTitulo.add(panelDescricao);
-		panelDescricao.setToolTipText("");
-		panelDescricao.setLayout(null);
-		
-		JLabel lblCadastroDeCliente = DefaultComponentFactory.getInstance().createTitle("Cadastro de Produto");
-		lblCadastroDeCliente.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblCadastroDeCliente.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCadastroDeCliente.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		lblCadastroDeCliente.setBounds(120, 0, 200, 35);
-		panelDescricao.add(lblCadastroDeCliente);
 		setLayout(groupLayout);
 
 	}
